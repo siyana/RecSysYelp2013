@@ -23,3 +23,7 @@
 2016-06-12 11:58:33,626 [Worker-1] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\FMI_Projects\RecSysProject\RecSysYelp2013\RecSysYelp2013\src\main\resources
 2016-06-12 11:58:33,629 [Worker-1] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
 2016-06-12 11:58:33,629 [Worker-1] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\FMI_Projects\RecSysProject\RecSysYelp2013\RecSysYelp2013\src\test\resources
+2016-06-12 12:42:26,760 [Worker-1] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-06-12 12:42:26,760 [Worker-1] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\FMI_Projects\RecSysProject\RecSysYelp2013\RecSysYelp2013\src\main\resources
+2016-06-12 12:42:26,762 [Worker-1] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-06-12 12:42:26,762 [Worker-1] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\FMI_Projects\RecSysProject\RecSysYelp2013\RecSysYelp2013\src\test\resources
