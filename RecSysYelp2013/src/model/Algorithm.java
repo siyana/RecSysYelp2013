@@ -24,7 +24,8 @@ import org.apache.mahout.cf.taste.similarity.UserSimilarity;
 
 public class Algorithm {
 
-	private static final String RATINGS_PATH = "";
+	private static final String userDir = System.getProperty("user.dir");
+	private static final String RATINGS_PATH = userDir + "/resources/yelp_training_set/yelp_training_set_review_train.csv";
 
 	private DataModel model = null;
 
