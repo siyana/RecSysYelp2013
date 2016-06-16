@@ -3,3 +3,9 @@ user threshold: 0.05
 svd: numFeatures: 2, lambda: 0.05, numIterations: 100)
 svd++: numFeatures: 2, numIterations: 20
 cold start decision: none
+
+File name :preferences_2
+user threshold: 0.05
+svd: numFeatures: 2, lambda: 0.05, numIterations: 100)
+svd++: numFeatures: 2, numIterations: 20
+cold start decision: if item based is used, get item avg, else get user avg

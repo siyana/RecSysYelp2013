@@ -13,23 +13,10 @@ import model.Data.DataManagerObject;
 public class Main {
 
 	public static void main(String[] args) {
-		Algorithm alg;
+
 		
-		try {
-//			ReadCSVFile read = new ReadCSVFile();
-//			read.run(Algorithm.TEST_RATINGS_PATH);
-			
-			alg = new Algorithm();
-		   alg.getPreference(36384, 5048, RecommenderType.RecommenderTypeUserBased);
-//			System.out.println("Preference: " + alg.getPreference(1, 1, RecommenderType.RecommenderTypeUserBased));
-//			System.out.println("Preference: " + alg.getPreference(1, 1, RecommenderType.RecommenderTypeSVD));
-//			System.out.println("Preference: " + alg.getPreference(1, 1, RecommenderType.RecommenderTypeItemBased));
-//			System.out.println("Preference: " + alg.getPreference(1, 1, RecommenderType.RecommenderTypeSVDPlusPlus));
-			
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		ReadCSVFile read = new ReadCSVFile();
+		read.savePreferences(Algorithm.TEST_RATINGS_PATH);
 		
 
 	}
