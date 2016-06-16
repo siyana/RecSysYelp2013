@@ -1,0 +1,5 @@
+File name :preferences_1
+user threshold: 0.05
+svd: numFeatures: 2, lambda: 0.05, numIterations: 100)
+svd++: numFeatures: 2, numIterations: 20
+cold start decision: none
