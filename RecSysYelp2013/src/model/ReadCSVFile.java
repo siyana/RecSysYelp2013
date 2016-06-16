@@ -5,16 +5,77 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import model.Algorithm.RecommenderType;
+import model.Data.DataManagerObject;
 
 public class ReadCSVFile {
+
+	public enum AverageRatingsType {
+		AverageRatingsTypeUser,
+		AverageRatingsTypeItem
+	}
+
+	private static final String USERS_AVG_PATH = Algorithm.userDir + "/resources/mapped/users_average_ratings.csv";
+	private static final String BUSINESS_AVG_PATH = Algorithm.userDir + "/resources/mapped/business_average_ratings.csv";
 
 	private static final String FILE_PATH = Algorithm.userDir + "/resources/mapped/preferences.csv";
 	private FileWriter fileWriter = null;
 
-	public void run(String path) {
+	public ArrayList<DataManagerObject> readAverageRatings(AverageRatingsType type) {
+		String path = avgRatingsPathForType(type);
+		BufferedReader br = null;
+		String line = "";
+		String cvsSplitBy = ",";
+		ArrayList<DataManagerObject> list = new ArrayList<DataManagerObject>();
 
+		try {
+			br = new BufferedReader(new FileReader(path));
+			while ((line = br.readLine()) != null) {
+				String[] splitedLine = line.split(cvsSplitBy);
+				DataManagerObject obj = parsedObject(splitedLine);
+				if (obj != null ) {
+					list.add(obj);
+				}
+			}
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return list;
+	}
+
+	private DataManagerObject parsedObject(String[] line){
+		int id = Integer.parseInt(line[0]);
+		float stars = Float.parseFloat(line[1]);
+		return new DataManagerObject(id,stars);
+	}
+
+	private String avgRatingsPathForType (AverageRatingsType type) {
+		String path = "";
+		switch (type) {
+		case AverageRatingsTypeUser:
+			path = USERS_AVG_PATH;
+			break;
+		case AverageRatingsTypeItem:
+			path = BUSINESS_AVG_PATH; 
+			break;
+		default:
+			break;
+		}
+
+		return path;
+	}
+
+	public void savePreferences(String path) {
 		BufferedReader br = null;
 		String line = "";
 		String cvsSplitBy = ",";
@@ -59,7 +120,6 @@ public class ReadCSVFile {
 				}
 			}
 		}
-
 		System.out.println("Done");
 	}
 

@@ -22,6 +22,8 @@ import org.apache.mahout.cf.taste.recommender.UserBasedRecommender;
 import org.apache.mahout.cf.taste.similarity.ItemSimilarity;
 import org.apache.mahout.cf.taste.similarity.UserSimilarity;
 
+import model.Data.DataManager;
+
 public class Algorithm {
 
 	public enum RecommenderType {
@@ -41,18 +43,21 @@ public class Algorithm {
 	private Recommender itemBasedRec = null;
 	private Recommender svdRec = null;
 	private Recommender svdPlusPlusRec = null;
+	
+	private DataManager dataManager = null;
 
 	public Algorithm() throws IOException {
 		super();
+		dataManager = new DataManager();
 		File ratings = new File(TRAINING_RATINGS_PATH);
 		this.model = new FileDataModel(ratings, ",");
 		this.testModel = new FileDataModel(new File(TEST_RATINGS_PATH));
 	}
 	
-	public void calculatePreferences(){
-		
-	}
-
+	/*
+	* @category Preference
+	*/
+	
 	public float getPreference(int userID, int itemID, RecommenderType type) {
 		Recommender recommender = null;
 		try {
@@ -74,18 +79,31 @@ public class Algorithm {
 				break;
 			}
 			float preference = recommender.estimatePreference(userID, itemID);
-			if (preference == Float.NaN) {
-				preference = 0;
+			if (Double.isNaN(preference)) {
+				preference = averagePreference(userID, itemID, type);
 			}
 			return preference;
 		} catch (TasteException e) {
 //			e.printStackTrace();
-			return -1;
+			return averagePreference(userID, itemID, type);
 		} catch (IOException e) {
 //			e.printStackTrace();
-			return -1;
+			return averagePreference(userID, itemID, type);
 		}
 	}
+	
+	private float averagePreference(int userID, int itemID, RecommenderType type) {
+		if (type == RecommenderType.RecommenderTypeItemBased){
+			return dataManager.averageStarsForItem(itemID);
+		} 
+		
+		return dataManager.averageStarsForUser(userID);		
+	}
+	
+	/*
+	* @category Recommenders
+	*/
+	
 
 	public Recommender svd() throws TasteException {
 		if(this.svdRec == null) {
@@ -117,7 +135,7 @@ public class Algorithm {
 				}
 			};
 			this.svdPlusPlusRec = recBuilder.buildRecommender(model);
-			evaluate(recBuilder, testModel);
+//			evaluate(recBuilder, testModel);
 		}
 				
 		return this.svdPlusPlusRec;
@@ -167,7 +185,10 @@ public class Algorithm {
 		//		printRecommendations(userID, recBuilder, model);
 		//		evaluate(recBuilder, model);
 	}
-
+	/*
+	* @category Helpers
+	*/
+	
 	private void printRecommendations(int id, RecommenderBuilder recBuilder, DataModel model) {
 		try {
 			long startTime = System.nanoTime();

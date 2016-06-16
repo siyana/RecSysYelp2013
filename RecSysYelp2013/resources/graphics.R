@@ -12,4 +12,5 @@ plot = function (a,xCol) {
 compare(preference1,3,5)
 plot(preference1, 6)
 
-
+unownuser = length(which(preference1[6]==-2))
+unknownitem = length(which(preference1[7]==-2))
