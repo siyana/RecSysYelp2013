@@ -24,3 +24,8 @@ File name: preferences_5
 userBased: threshold: 0.2
 svd: numFeatures: 2, lambda: 0.05, numIterations: 50
 svd++: numFeatures: 3, numIterations: 20
+
+File name: preferences_6
+userBased: threshold: 0.25
+svd: numFeatures: 2, lambda: 0.05, numIterations: 150
+svd++: numFeatures: 3, numIterations: 30

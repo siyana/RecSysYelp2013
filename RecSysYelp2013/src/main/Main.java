@@ -14,18 +14,18 @@ public class Main {
 	public static void main(String[] args) {
 		System.out.println("Started: " + LocalTime.now());
 		String pathToResultNotesFile = System.getProperty("user.dir") + "/resources/mapped/results.txt";
-		String resultsFilename = "preferences_5";
+		String resultsFilename = "preferences_6";
 		String comment = "\n";
 		
 		//userBased
-		double threshold = 0.2;
+		double threshold = 0.25;
 		//svd
 		int numFeature = 2;
 		double lamda = 0.05; 
-		int numIterations = 50; 
+		int numIterations = 150; 
 		//svd++
 		int numFeaturePP = 3;
-		int numIterationsPP = 20;
+		int numIterationsPP = 30;
 		
 		ReadCSVFile read = new ReadCSVFile(resultsFilename);
 		read.savePreferences(
