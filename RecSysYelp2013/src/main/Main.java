@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
+import java.time.LocalTime;
 
 import model.Algorithm;
 import model.ReadCSVFile;
@@ -11,19 +12,20 @@ import model.ReadCSVFile;
 public class Main {
 
 	public static void main(String[] args) {
+		System.out.println("Started: " + LocalTime.now());
 		String pathToResultNotesFile = System.getProperty("user.dir") + "/resources/mapped/results.txt";
 		String resultsFilename = "preferences_4";
 		String comment = "\n";
 		
 		//userBased
-		double threshold = 0.1;
+		double threshold = 0.025;
 		//svd
 		int numFeature = 2;
-		double lamda = 0.1; 
+		double lamda = 0.025; 
 		int numIterations = 100; 
 		//svd++
 		int numFeaturePP = 2;
-		int numIterationsPP = 10;
+		int numIterationsPP = 30;
 		
 		ReadCSVFile read = new ReadCSVFile(resultsFilename);
 		read.savePreferences(
@@ -44,7 +46,7 @@ public class Main {
 		} catch (IOException ioe){
 			ioe.printStackTrace();
 		}
-	
+		System.out.println("Finished: " + LocalTime.now());
 	}
 
 }
