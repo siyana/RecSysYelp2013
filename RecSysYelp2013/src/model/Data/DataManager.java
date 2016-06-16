@@ -13,7 +13,7 @@ public class DataManager {
 
 	public DataManager() {
 		super();
-		ReadCSVFile reader = new ReadCSVFile();
+		ReadCSVFile reader = new ReadCSVFile("");
 		users = reader.readAverageRatings(AverageRatingsType.AverageRatingsTypeUser);
 		items = reader.readAverageRatings(AverageRatingsType.AverageRatingsTypeItem);
 	}

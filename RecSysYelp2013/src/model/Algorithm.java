@@ -36,6 +36,17 @@ public class Algorithm {
 	public static final String userDir = System.getProperty("user.dir");
 	public static final String TRAINING_RATINGS_PATH = userDir + "/resources/mapped/yelp_training_set_review_train.csv";
 	public static final String TEST_RATINGS_PATH = userDir + "/resources/mapped/yelp_training_set_review_test.csv";
+	
+	//Algorithm parameters:
+	//UserBased
+	private double threshold = 0.05;
+	//svd
+	private int numFeature = 2;
+	private double lamda = 0.05; 
+	private int numIterations = 100; 
+	//svd++
+	private int numFeaturePP = 2;
+	private int numIterationsPP = 20;
 
 	private DataModel model = null;
 	private DataModel testModel = null;
@@ -57,7 +68,7 @@ public class Algorithm {
 	/*
 	* @category Preference
 	*/
-	
+
 	public float getPreference(int userID, int itemID, RecommenderType type) {
 		Recommender recommender = null;
 		try {
@@ -109,7 +120,7 @@ public class Algorithm {
 		if(this.svdRec == null) {
 			RecommenderBuilder recBuilder = new RecommenderBuilder() {
 				public Recommender buildRecommender(DataModel arg0) throws TasteException {
-					ALSWRFactorizer factorizer = new ALSWRFactorizer(arg0, 2, 0.05, 100);
+					ALSWRFactorizer factorizer = new ALSWRFactorizer(arg0, numFeature, lamda, numIterations);
 					Recommender recommender = new SVDRecommender(arg0, factorizer);
 					return recommender;
 				}
@@ -129,7 +140,7 @@ public class Algorithm {
 		if(this.svdPlusPlusRec == null) {
 			RecommenderBuilder recBuilder = new RecommenderBuilder() {
 				public Recommender buildRecommender(DataModel arg0) throws TasteException {
-					SVDPlusPlusFactorizer svdFact = new SVDPlusPlusFactorizer(arg0, 2, 20);
+					SVDPlusPlusFactorizer svdFact = new SVDPlusPlusFactorizer(arg0, numFeaturePP, numIterationsPP);
 					Recommender recommender = new SVDRecommender(arg0, svdFact);
 					return recommender;
 				}
@@ -151,7 +162,7 @@ public class Algorithm {
 					// TODO Auto-generated method stub
 					// find user to user similarities
 					UserSimilarity similarity = new PearsonCorrelationSimilarity(arg0);
-					UserNeighborhood neighborhood = new ThresholdUserNeighborhood(0.05, similarity, arg0);
+					UserNeighborhood neighborhood = new ThresholdUserNeighborhood(threshold, similarity, arg0);
 
 					// create recommender
 					UserBasedRecommender recommender = new GenericUserBasedRecommender(arg0, neighborhood, similarity);
@@ -214,5 +225,54 @@ public class Algorithm {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	//setters and getters
+	public double getThreshold() {
+		return threshold;
+	}
+
+	public void setThreshold(double threshold) {
+		this.threshold = threshold;
+	}
+
+	public int getNumFeature() {
+		return numFeature;
+	}
+
+	public void setNumFeature(int numFeature) {
+		this.numFeature = numFeature;
+	}
+
+	public double getLamda() {
+		return lamda;
+	}
+
+	public void setLamda(double lamda) {
+		this.lamda = lamda;
+	}
+
+	public int getNumIterations() {
+		return numIterations;
+	}
+
+	public void setNumIterations(int numIterations) {
+		this.numIterations = numIterations;
+	}
+
+	public int getNumFeaturePP() {
+		return numFeaturePP;
+	}
+
+	public void setNumFeaturePP(int numFeaturePP) {
+		this.numFeaturePP = numFeaturePP;
+	}
+
+	public int getNumIterationsPP() {
+		return numIterationsPP;
+	}
+
+	public void setNumIterationsPP(int numIterationsPP) {
+		this.numIterationsPP = numIterationsPP;
 	}
 }

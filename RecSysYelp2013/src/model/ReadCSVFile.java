@@ -16,13 +16,16 @@ public class ReadCSVFile {
 		AverageRatingsTypeUser,
 		AverageRatingsTypeItem
 	}
-
 	private static final String USERS_AVG_PATH = Algorithm.userDir + "/resources/mapped/users_average_ratings.csv";
 	private static final String BUSINESS_AVG_PATH = Algorithm.userDir + "/resources/mapped/business_average_ratings.csv";
-
-	private static final String FILE_PATH = Algorithm.userDir + "/resources/mapped/preferences.csv";
+	private String resultFileName;
+	private String resultFilePath;;
 	private FileWriter fileWriter = null;
 
+	public ReadCSVFile(String resultFileName){
+		this.resultFileName = resultFileName;
+		resultFilePath = Algorithm.userDir + "/resources/mapped/" + resultFileName + ".csv";
+	}
 	public ArrayList<DataManagerObject> readAverageRatings(AverageRatingsType type) {
 		String path = avgRatingsPathForType(type);
 		BufferedReader br = null;
@@ -75,15 +78,23 @@ public class ReadCSVFile {
 		return path;
 	}
 
-	public void savePreferences(String path) {
+	public void savePreferences(String trainingSetFilePath, double threshold, 
+			int numFeature, double lamda, int numIterations,
+			int numFeaturePP, int numIterationsPP) {
 		BufferedReader br = null;
 		String line = "";
 		String cvsSplitBy = ",";
 
 		try {
 			Algorithm alg = new Algorithm();
-			fileWriter = new FileWriter(FILE_PATH);
-			br = new BufferedReader(new FileReader(path));
+			alg.setThreshold(threshold);
+			alg.setNumFeature(numFeature);
+			alg.setLamda(lamda);
+			alg.setNumIterations(numIterations);
+			alg.setNumFeaturePP(numFeaturePP);
+			alg.setNumIterationsPP(numIterationsPP);
+			fileWriter = new FileWriter(resultFilePath);
+			br = new BufferedReader(new FileReader(trainingSetFilePath));
 			while ((line = br.readLine()) != null) {
 				String[] splitedLine = line.split(cvsSplitBy);
 				int userID = Integer.parseInt(splitedLine[0]);
