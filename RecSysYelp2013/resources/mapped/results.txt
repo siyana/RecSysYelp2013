@@ -29,3 +29,8 @@ File name: preferences_6
 userBased: threshold: 0.25
 svd: numFeatures: 2, lambda: 0.05, numIterations: 150
 svd++: numFeatures: 3, numIterations: 30
+
+File name: preferences_3_hybrid
+userBased: threshold: 0.1
+svd: numFeatures: 2, lambda: 0.1, numIterations: 100
+svd++: numFeatures: 2, numIterations: 10

@@ -8,6 +8,9 @@ preference4 = read.csv("E:\\Projects\\Workspace\\RecSysYelp2013\\RecSysYelp2013\
 preference5 = read.csv("E:\\Projects\\Workspace\\RecSysYelp2013\\RecSysYelp2013\\RecSysYelp2013\\resources\\mapped\\preferences_5.csv")
 preference6 = read.csv("E:\\Projects\\Workspace\\RecSysYelp2013\\RecSysYelp2013\\RecSysYelp2013\\resources\\mapped\\preferences_6.csv")
 
+preference_hybrid = read.csv("E:\\Projects\\Workspace\\RecSysYelp2013\\RecSysYelp2013\\RecSysYelp2013\\resources\\mapped\\preferences_3_hybrid.csv")
+
+
 existingDF = data.frame()
 calculateError = function(col){
    pr1 = pRmse(preference1,col)
@@ -16,9 +19,11 @@ calculateError = function(col){
    pr4 = pRmse(preference4,col)
    pr5 = pRmse(preference5,col)
    pr6 = pRmse(preference6,col)
+   pr7 = pRmse(preference_hybrid,col)
    x = data.frame(preference_1_rmse = pr1, preference_2_rmse = pr2,
                   preference_3_rmse = pr3, preference_4_rmse = pr4,
-                  preference_5_rmse = pr5, preference_6_rmse = pr6)
+                  preference_5_rmse = pr5, preference_6_rmse = pr6,
+                  preference_3_hybrid_rmse = pr7)
 }
 existingDF = rbind(existingDF,calculateError(4))
 existingDF = rbind(existingDF,calculateError(5))

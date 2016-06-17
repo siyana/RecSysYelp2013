@@ -93,7 +93,12 @@ public class Algorithm {
 			if (Double.isNaN(preference)) {
 				preference = averagePreference(userID, itemID, type);
 			}
-			return preference;
+			
+			float userPref = userBased().estimatePreference(userID, itemID);
+			if (Double.isNaN(userPref)) {
+				userPref = averagePreference(userID, itemID, type);
+			}
+			return (preference + userPref)/2;
 		} catch (TasteException e) {
 //			e.printStackTrace();
 			return averagePreference(userID, itemID, type);
