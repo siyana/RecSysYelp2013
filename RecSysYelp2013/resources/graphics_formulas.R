@@ -10,6 +10,24 @@ pPlot = function (a,xCol) {
    qplot(data = a, x = a[xCol], geom = "histogram")
 }
 
+rmsePlot = function(dataSet, predictedCol, rmseValue) {
+## fit model
+y = userPref
+x = realPref
+fit <- lm(x~y, data = preference1)
+coefs <- coef(fit)
+b0 <- round(coefs[1], 2)
+b1 <- round(coefs[2],2)
+r2 <- round(summary(fit)$r.squared, 2)
+
+eqn <- bquote(italic(y) == .(b0) + .(b1)*italic(x) * "," ~~ 
+                  r^2 == .(r2) * "," ~~ RMSE == .(rmseValue))
+## Plot the data
+plot(x ~ y, data = data.frame(userId,realPref))
+abline(fit)
+text(2, 10, eqn, pos = 4)
+}
+
 compareFileName = function(xName, xColumnName) {
     fileNameCompare = paste(paste(xName, "real_", sep = "_"), xColumnName, ".png", sep = "")
     fullFileName = paste(baseGraphicsPath,xColumnName,"\\", fileNameCompare, sep = "")

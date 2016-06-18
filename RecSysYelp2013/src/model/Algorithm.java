@@ -98,7 +98,7 @@ public class Algorithm {
 			if (Double.isNaN(userPref)) {
 				userPref = averagePreference(userID, itemID, type);
 			}
-			return (preference + userPref)/2;
+			return (0.4f*preference + 0.6f*userPref);
 		} catch (TasteException e) {
 //			e.printStackTrace();
 			return averagePreference(userID, itemID, type);

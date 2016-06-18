@@ -14,8 +14,8 @@ public class Main {
 	public static void main(String[] args) {
 		System.out.println("Started: " + LocalTime.now());
 		String pathToResultNotesFile = System.getProperty("user.dir") + "/resources/mapped/results.txt";
-		String resultsFilename = "preferences_3_hybrid";
-		String comment = "\n";
+		String resultsFilename = "preferences_3_hybrid_weighted";
+		String comment = "\ncold start decision: if item based is used, get item avg, else get user avg \nhybrid: weighted - 0.6*userBased + 0.4 * other";
 		
 		//userBased
 		double threshold = 0.1;
