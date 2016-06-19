@@ -17,7 +17,7 @@ ggplot() +
 
 dev.off()
 
-threshold = c(0.025,0.05,0.05,0.1,0.1,0.1,0.2,0.25,0.5)
+threshold = c(0.025,0.05,0.05,0.1,0.1, 0.1,0.1,0.2,0.25,0.5)
 userBased = data.frame(userPref,threshold)
 png(filename=plotErrorFileName (varToString(userBased), "threshold"))
    ggplot() + geom_line(data = userBased , aes(y = userPref, x = threshold, color = "red"))
