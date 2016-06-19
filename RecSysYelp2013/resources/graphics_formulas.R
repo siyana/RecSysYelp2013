@@ -10,24 +10,6 @@ pPlot = function (a,xCol) {
    qplot(data = a, x = a[xCol], geom = "histogram")
 }
 
-rmsePlot = function(dataSet, predictedCol, rmseValue) {
-## fit model
-y = userPref
-x = realPref
-fit <- lm(x~y, data = preference1)
-coefs <- coef(fit)
-b0 <- round(coefs[1], 2)
-b1 <- round(coefs[2],2)
-r2 <- round(summary(fit)$r.squared, 2)
-
-eqn <- bquote(italic(y) == .(b0) + .(b1)*italic(x) * "," ~~ 
-                  r^2 == .(r2) * "," ~~ RMSE == .(rmseValue))
-## Plot the data
-plot(x ~ y, data = data.frame(userId,realPref))
-abline(fit)
-text(2, 10, eqn, pos = 4)
-}
-
 compareFileName = function(xName, xColumnName) {
     fileNameCompare = paste(paste(xName, "real_", sep = "_"), xColumnName, ".png", sep = "")
     fullFileName = paste(baseGraphicsPath,xColumnName,"\\", fileNameCompare, sep = "")
@@ -35,7 +17,12 @@ compareFileName = function(xName, xColumnName) {
 
 plotFileName = function(xName, xColumnName) {
     fileNamePlot = paste(xName, xColumnName, sep = "_")
-    fullFileName = paste(baseGraphicsPath, xColumnName,"\\", paste(xName, "_svd.png", sep = ""), sep = "")
+    fullFileName = paste(baseGraphicsPath, xColumnName,"\\", paste(xName, ".png", sep = ""), sep = "")
+}
+
+plotErrorFileName = function(xName, parameterName) {
+    fileNamePlot = paste(xName, parameterName, sep = "_")
+    fullFileName = paste(baseGraphicsPath, "parameter_change","\\", paste(xName,"_",parameterName, ".png", sep = ""), sep = "")
 }
 
 #save_png = function(x, predictedColumnNumber, xName, xColumnName) {
