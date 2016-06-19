@@ -1,5 +1,5 @@
-source("E:\\Projects\\Workspace\\RecSysYelp2013\\RecSysYelp2013\\RecSysYelp2013\\resources\\graphics_formulas.R")
-source("E:\\Projects\\Workspace\\RecSysYelp2013\\RecSysYelp2013\\RecSysYelp2013\\resources\\help_formulas.R")
+source("E:\\Projects\\Workspace\\RecSysYelp2013\\RecSysYelp2013\\RecSysYelp2013\\resources\\R scripts\\graphics_formulas.R")
+source("E:\\Projects\\Workspace\\RecSysYelp2013\\RecSysYelp2013\\RecSysYelp2013\\resources\\R scripts\\help_formulas.R")
 
 errors = read.csv("E:\\Projects\\Workspace\\RecSysYelp2013\\RecSysYelp2013\\RecSysYelp2013\\resources\\mapped\\rmse_results_s.csv")
 attach(errors)
@@ -22,7 +22,7 @@ userBased = data.frame(userPref,threshold)
 png(filename=plotErrorFileName (varToString(userBased), "threshold"))
    ggplot() + geom_point(data = userBased , aes(y = userPref, x = threshold, color = "user based")) +
    geom_text(aes(y = userPref, x = threshold, label = paste(round(userPref, 2)),
-   hjust=0, vjust=-0.3, angle = 0, check_overlap = TRUE))
+   hjust=0, vjust=-0.3, angle = 0), check_overlap = FALSE, size=rel(2.3))
 dev.off()
 
 lambda = c(0.025,0.05,0.05,0.05,0.05,0.1,0.1,0.1, 0.1,0.1)
@@ -30,7 +30,7 @@ svd = data.frame(svdPref,lambda)
 png(filename=plotErrorFileName (varToString(svd), "lambda"))
    ggplot() + geom_point(data = svd, aes(y = svdPref, x = lambda, color = "svd")) +
    geom_text(aes(y = svdPref, x = lambda, label = paste(round(svdPref, 2)),
-   hjust=0, vjust=-0.3, angle = 60, check_overlap = TRUE))
+   hjust=0.3, vjust=-0.3, angle = 0), check_overlap = TRUE)
 dev.off()
 
 numIterations = c(10,10,10,10, 10,20,20,20, 30,30)
@@ -38,7 +38,7 @@ svdPlusPlus = data.frame(svdPlusPlusPref,numIterations)
 png(filename=plotErrorFileName (varToString(svdPlusPlus), "numIterations"))
    ggplot() + geom_point(data = svdPlusPlus, aes(y = svdPlusPlusPref, x = numIterations, color = "svd++")) +
    geom_text(aes(y = svdPlusPlusPref, x = numIterations, label = paste(round(svdPlusPlusPref, 2)),
-   hjust=0, vjust=-0.3, angle = 0, check_overlap = TRUE))
+   hjust=0, vjust=-0.3, angle = 0), check_overlap = TRUE)
 dev.off()
 
 rows = 1:10
@@ -46,7 +46,7 @@ itemBased = data.frame(itemPref,rows)
 png(filename=plotErrorFileName(varToString(itemBased), "rows"))
    ggplot() + geom_point(data = itemBased, aes(y = itemPref, x = rows, color = "item based")) +
    geom_text(aes(y = itemPref, x = rows, label = paste(round(itemPref, 2)),
-   hjust=0, vjust=-0.3, angle = 60, check_overlap = TRUE))
+   hjust=0, vjust=-0.3, angle = 60), check_overlap = TRUE)
 
 dev.off()
 
