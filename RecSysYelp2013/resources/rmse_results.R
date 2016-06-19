@@ -11,7 +11,7 @@ preference4 = read.csv("E:\\Projects\\Workspace\\RecSysYelp2013\\RecSysYelp2013\
 preference5 = read.csv("E:\\Projects\\Workspace\\RecSysYelp2013\\RecSysYelp2013\\RecSysYelp2013\\resources\\mapped\\preferences_5.csv")
 preference6 = read.csv("E:\\Projects\\Workspace\\RecSysYelp2013\\RecSysYelp2013\\RecSysYelp2013\\resources\\mapped\\preferences_6.csv")
 preference7 = read.csv("E:\\Projects\\Workspace\\RecSysYelp2013\\RecSysYelp2013\\RecSysYelp2013\\resources\\mapped\\preferences_7.csv")
-
+preference8 = read.csv("E:\\Projects\\Workspace\\RecSysYelp2013\\RecSysYelp2013\\RecSysYelp2013\\resources\\mapped\\preferences_8.csv")
 
 preference_hybrid = read.csv("E:\\Projects\\Workspace\\RecSysYelp2013\\RecSysYelp2013\\RecSysYelp2013\\resources\\mapped\\preferences_3_hybrid.csv")
 preference_hybrid_w = read.csv("E:\\Projects\\Workspace\\RecSysYelp2013\\RecSysYelp2013\\RecSysYelp2013\\resources\\mapped\\preferences_3_hybrid_weighted.csv")
@@ -26,13 +26,14 @@ calculateError = function(col){
    pr5 = pRmse(preference5,col)
    pr6 = pRmse(preference6,col)
    pr7 = pRmse(preference7,col)
-   pr8 = pRmse(preference_hybrid,col)
-   pr9 = pRmse(preference_hybrid_w,col)
+   pr8 = pRmse(preference8,col)
+   pr9 = pRmse(preference_hybrid,col)
+   pr10 = pRmse(preference_hybrid_w,col)
    x = data.frame(preference_1_rmse = pr1, preference_2_rmse = pr2,
                   preference_3_rmse = pr3, preference_4_rmse = pr4,
                   preference_5_rmse = pr5, preference_6_rmse = pr6,
-                  preference_7_rmse = pr7,
-                  preference_3_hybrid_rmse = pr8, preference_3_hybrid_w_rmse = pr9)
+                  preference_7_rmse = pr7, preference_8_rmse = pr8,
+                  preference_3_hybrid_rmse = pr9, preference_3_hybrid_w_rmse = pr10)
 }
 
 existingDF = rbind(existingDF,calculateError(4))
@@ -60,9 +61,10 @@ existingDFT = rbind(existingDFT,calculateErrorT(preference4))
 existingDFT = rbind(existingDFT,calculateErrorT(preference5))
 existingDFT = rbind(existingDFT,calculateErrorT(preference6))
 existingDFT = rbind(existingDFT,calculateErrorT(preference7))
+existingDFT = rbind(existingDFT,calculateErrorT(preference8))
 existingDFT = rbind(existingDFT,calculateErrorT(preference_hybrid))
 existingDFT = rbind(existingDFT,calculateErrorT(preference_hybrid_w))
 
-row.names(existingDFT) = c("pref1","pref2","pref3","pref4","pref5","pref6","pref7","pref_h","pref_h_w")
+row.names(existingDFT) = c("pref1","pref2","pref3","pref4","pref5","pref6","pref7","pref8","pref_h","pref_h_w")
 
 write.csv(existingDFT, file = resultsPathT , row.names=TRUE, fileEncoding = "UTF-8") 
