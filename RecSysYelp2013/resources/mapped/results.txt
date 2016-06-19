@@ -57,3 +57,9 @@ svd: numFeatures: 5, lambda: 0.1, numIterations: 100
 svd++: numFeatures: 5, numIterations: 10
 cold start decision: get avg ot item avg and user avg 
 hybrid: none
+File name: preferences_8
+userBased: threshold: 0.1
+svd: numFeatures: 5, lambda: 0.1, numIterations: 100
+svd++: numFeatures: 5, numIterations: 10
+cold start decision: get avg ot item avg and user avg 
+hybrid: none

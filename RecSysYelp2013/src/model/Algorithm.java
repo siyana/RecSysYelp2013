@@ -112,7 +112,7 @@ public class Algorithm {
 //		if (type == RecommenderType.RecommenderTypeItemBased){
 //			return dataManager.averageStarsForItem(itemID);
 //		} 
-		float avg = (dataManager.averageStarsForUser(userID) + dataManager.averageStarsForItem(itemID)/2.0f);
+		float avg = (dataManager.averageStarsForUser(userID) + dataManager.averageStarsForItem(itemID))/2.0f;
 		return avg;		
 	}
 	
