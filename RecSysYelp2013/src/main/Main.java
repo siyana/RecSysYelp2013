@@ -14,11 +14,11 @@ public class Main {
 	public static void main(String[] args) {
 		System.out.println("Started: " + LocalTime.now());
 		String pathToResultNotesFile = System.getProperty("user.dir") + "/resources/mapped/results.txt";
-		String resultsFilename = "preferences_3_hybrid_weighted";
-		String comment = "\ncold start decision: if item based is used, get item avg, else get user avg \nhybrid: weighted - 0.6*userBased + 0.4 * other";
+		String resultsFilename = "preferences_7";
+		String comment = "\ncold start decision: get avg ot item avg and user avg \nhybrid: none";
 		
 		//userBased
-		double threshold = 0.1;
+		double threshold = 0.5;
 		//svd
 		int numFeature = 2;
 		double lamda = 0.1; 

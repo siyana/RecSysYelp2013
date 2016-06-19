@@ -55,3 +55,9 @@ svd++: numFeatures: 2, numIterations: 10
 cold start decision: if item based is used, get item avg, else get user avg 
 
 hybrid: weighted - 0.6*userBased + 0.4 * other
+File name: preferences_7
+userBased: threshold: 0.5
+svd: numFeatures: 2, lambda: 0.1, numIterations: 100
+svd++: numFeatures: 2, numIterations: 10
+cold start decision: get avg ot item avg and user avg 
+hybrid: none
