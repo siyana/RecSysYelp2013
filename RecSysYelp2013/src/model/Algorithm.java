@@ -132,13 +132,13 @@ public class Algorithm {
 	}
 	
 	private float averagePreference(int userID, int itemID, RecommenderType type) {
-		if (type == RecommenderType.RecommenderTypeItemBased){
-			return dataManager.averageStarsForItem(itemID);
-		} 
-		return dataManager.averageStarsForUser(userID);
-		
-//		float avg = (dataManager.averageStarsForUser(userID) + dataManager.averageStarsForItem(itemID))/2.0f;
-//		return avg;		
+//		if (type == RecommenderType.RecommenderTypeItemBased){
+//			return dataManager.averageStarsForItem(itemID);
+//		} 
+//		return dataManager.averageStarsForUser(userID);
+//		
+		float avg = (dataManager.averageStarsForUser(userID) + dataManager.averageStarsForItem(itemID))/2.0f;
+		return avg;		
 	}
 	
 	/*
