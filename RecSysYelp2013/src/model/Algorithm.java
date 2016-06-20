@@ -55,7 +55,13 @@ public class Algorithm {
 	private Recommender svdRec = null;
 	private Recommender svdPlusPlusRec = null;
 	
-	private DataManager dataManager = null;
+	private DataManager dataManager = null;	
+	private Evaluation evaluator = null;
+	
+	private double userBasedRMSE = -1;
+	private double itemBasedRMSE = -1;
+	private double svdRMSE = -1;
+	private double svdPlusPlusRMSE = -1;
 
 	public Algorithm() throws IOException {
 		super();
@@ -63,6 +69,7 @@ public class Algorithm {
 		File ratings = new File(TRAINING_RATINGS_PATH);
 		this.model = new FileDataModel(ratings, ",");
 		this.testModel = new FileDataModel(new File(TEST_RATINGS_PATH));
+		this.evaluator =  new Evaluation();
 	}
 	
 	/*
@@ -108,6 +115,21 @@ public class Algorithm {
 		}
 	}
 	
+	public void estimateAlgorithms (){
+		try {
+			this.userBased();
+			this.itemBased();
+			this.svd();
+			this.svdPlusPlus();
+		} catch (TasteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 	private float averagePreference(int userID, int itemID, RecommenderType type) {
 //		if (type == RecommenderType.RecommenderTypeItemBased){
 //			return dataManager.averageStarsForItem(itemID);
@@ -133,6 +155,7 @@ public class Algorithm {
 			
 			
 			this.svdRec = recBuilder.buildRecommender(model);
+			svdRMSE = evaluate(recBuilder, model);
 		}
 
 		return this.svdRec;
@@ -151,7 +174,7 @@ public class Algorithm {
 				}
 			};
 			this.svdPlusPlusRec = recBuilder.buildRecommender(model);
-//			evaluate(recBuilder, testModel);
+			svdPlusPlusRMSE = evaluate(recBuilder, testModel);
 		}
 				
 		return this.svdPlusPlusRec;
@@ -176,6 +199,7 @@ public class Algorithm {
 			};
 			
 			this.userBasedRec = recBuilder.buildRecommender(model);
+			userBasedRMSE = evaluate(recBuilder, model);
 		}
 		
 		return this.userBasedRec;
@@ -195,6 +219,7 @@ public class Algorithm {
 			};
 			
 			this.itemBasedRec = recBuilder.buildRecommender(model);
+			itemBasedRMSE = evaluate(recBuilder, model);
 		}
 		
 		return this.itemBasedRec;
@@ -221,15 +246,15 @@ public class Algorithm {
 		}
 	}
 
-	private void evaluate(RecommenderBuilder recBuilder, DataModel model) {
+	private double evaluate(RecommenderBuilder recBuilder, DataModel model) {
 		try {
-			Evaluation ev = new Evaluation();
-			System.out.println("MAE: " + ev.MAE(recBuilder, null, model, 0.7, 0.1));
-			System.out.println("RMSE: " + ev.RMSE(recBuilder, null, model, 0.7, 0.1));
+			return evaluator.RMSE(recBuilder, null, model, 0.9, 0.2);
 		} catch (TasteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		return -1;
 	}
 	
 	//setters and getters
@@ -280,4 +305,21 @@ public class Algorithm {
 	public void setNumIterationsPP(int numIterationsPP) {
 		this.numIterationsPP = numIterationsPP;
 	}
+
+	public double getUserBasedRMSE() {
+		return userBasedRMSE;
+	}
+
+	public double getItemBasedRMSE() {
+		return itemBasedRMSE;
+	}
+
+	public double getSvdRMSE() {
+		return svdRMSE;
+	}
+
+	public double getSvdPlusPlusRMSE() {
+		return svdPlusPlusRMSE;
+	}
+	
 }

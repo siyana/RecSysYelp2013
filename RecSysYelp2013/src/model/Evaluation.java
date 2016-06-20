@@ -10,7 +10,7 @@ import org.apache.mahout.cf.taste.model.DataModel;
 
 public class Evaluation {
 
-	private RecommenderEvaluator evaluator = null;
+	private RMSRecommenderEvaluator evaluator = null;
 	private AverageAbsoluteDifferenceRecommenderEvaluator avrgRecommenderEvaluator = null;
 
 	public Evaluation() {
