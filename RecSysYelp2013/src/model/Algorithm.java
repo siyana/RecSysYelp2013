@@ -36,7 +36,7 @@ public class Algorithm {
 	public static final String userDir = System.getProperty("user.dir");
 	public static final String TRAINING_RATINGS_PATH = userDir + "/resources/mapped/yelp_training_set_review_train.csv";
 	public static final String TEST_RATINGS_PATH = userDir + "/resources/mapped/yelp_training_set_review_test.csv";
-	
+	public static final String TRAIN_TEST_RATINGS_PATH = userDir + "/resources/mapped/test_from_train.csv";
 	//Algorithm parameters:
 	//UserBased
 	private double threshold = 0.05;
@@ -101,11 +101,12 @@ public class Algorithm {
 				preference = averagePreference(userID, itemID, type);
 			}
 			
-			float userPref = userBased().estimatePreference(userID, itemID);
-			if (Double.isNaN(userPref)) {
-				userPref = averagePreference(userID, itemID, type);
-			}
-			return (0.4f*preference + 0.6f*userPref);
+//			float userPref = userBased().estimatePreference(userID, itemID);
+//			if (Double.isNaN(userPref)) {
+//				userPref = averagePreference(userID, itemID, type);
+//			}
+			return preference;
+//			return (0.4f*preference + 0.6f*userPref);
 		} catch (TasteException e) {
 //			e.printStackTrace();
 			return averagePreference(userID, itemID, type);
@@ -131,11 +132,13 @@ public class Algorithm {
 	}
 	
 	private float averagePreference(int userID, int itemID, RecommenderType type) {
-//		if (type == RecommenderType.RecommenderTypeItemBased){
-//			return dataManager.averageStarsForItem(itemID);
-//		} 
-		float avg = (dataManager.averageStarsForUser(userID) + dataManager.averageStarsForItem(itemID))/2.0f;
-		return avg;		
+		if (type == RecommenderType.RecommenderTypeItemBased){
+			return dataManager.averageStarsForItem(itemID);
+		} 
+		return dataManager.averageStarsForUser(userID);
+		
+//		float avg = (dataManager.averageStarsForUser(userID) + dataManager.averageStarsForItem(itemID))/2.0f;
+//		return avg;		
 	}
 	
 	/*
