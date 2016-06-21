@@ -36,6 +36,7 @@ public class Algorithm {
 	public static final String userDir = System.getProperty("user.dir");
 	public static final String TRAINING_RATINGS_PATH = userDir + "/resources/mapped/yelp_training_set_review_train.csv";
 	public static final String TEST_RATINGS_PATH = userDir + "/resources/mapped/yelp_training_set_review_test.csv";
+	public static final String SUBMISSION_TEST_RATINGS_PATH = userDir + "/resources/mapped/finalTestSetMapped.csv";
 	public static final String TRAIN_TEST_RATINGS_PATH = userDir + "/resources/mapped/test_from_train.csv";
 	//Algorithm parameters:
 	//UserBased

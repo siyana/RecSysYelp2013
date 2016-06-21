@@ -99,14 +99,18 @@ public class ReadCSVFile {
 				String[] splitedLine = line.split(cvsSplitBy);
 				int userID = Integer.parseInt(splitedLine[0]);
 				int itemID = Integer.parseInt(splitedLine[1]);
-				float realPreference = Integer.parseInt(splitedLine[2]);
-				float svdPreference = alg.getPreference(userID, itemID, RecommenderType.RecommenderTypeSVD);
-				float svdPlusPlusPreference = alg.getPreference(userID, itemID, RecommenderType.RecommenderTypeSVDPlusPlus);
+//				float realPreference = Integer.parseInt(splitedLine[2]);
+//				float svdPreference = alg.getPreference(userID, itemID, RecommenderType.RecommenderTypeSVD);
+//				float svdPlusPlusPreference = alg.getPreference(userID, itemID, RecommenderType.RecommenderTypeSVDPlusPlus);
+//				float userBasedPreference = alg.getPreference(userID, itemID, RecommenderType.RecommenderTypeUserBased);
+//				float itemBasedPreference = alg.getPreference(userID, itemID, RecommenderType.RecommenderTypeItemBased);
+//				String csvLine = userID + "," + itemID + "," + realPreference + 
+//						"," + svdPreference + "," + svdPlusPlusPreference +
+//						"," + userBasedPreference + "," + itemBasedPreference;
+//				writeToCSV(csvLine);
+				
 				float userBasedPreference = alg.getPreference(userID, itemID, RecommenderType.RecommenderTypeUserBased);
-				float itemBasedPreference = alg.getPreference(userID, itemID, RecommenderType.RecommenderTypeItemBased);
-				String csvLine = userID + "," + itemID + "," + realPreference + 
-						"," + svdPreference + "," + svdPlusPlusPreference +
-						"," + userBasedPreference + "," + itemBasedPreference;
+				String csvLine = userID + "," + itemID + "," + userBasedPreference;
 				writeToCSV(csvLine);
 
 			}

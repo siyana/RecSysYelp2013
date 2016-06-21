@@ -15,7 +15,7 @@ public class Main {
 		System.out.println("Started: " + LocalTime.now());
 		String pathToResultNotesFile = System.getProperty("user.dir") + "/resources/mapped/results.txt";
 		String pathToTrainErrorsNotesFile = System.getProperty("user.dir") + "/resources/mapped/train_rmse.txt";
-		String resultsFilename = "preferences_7_1";
+		String resultsFilename = "submission_test";
 		String comment = "\ncold start decision: get avg ot item avg and user avg \nhybrid: none";
 		
 		//userBased
@@ -30,7 +30,7 @@ public class Main {
 		
 		ReadCSVFile read = new ReadCSVFile(resultsFilename);
 		read.savePreferences(
-				Algorithm.TEST_RATINGS_PATH, 	  //path to test data set 
+				Algorithm.SUBMISSION_TEST_RATINGS_PATH, 	  //path to test data set 
 				threshold, 						  //userBased params
 				numFeature, lamda, numIterations, //svd params
 				numFeaturePP, numIterationsPP 	  //svd++ params
