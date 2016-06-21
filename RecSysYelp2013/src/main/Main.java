@@ -15,7 +15,7 @@ public class Main {
 		System.out.println("Started: " + LocalTime.now());
 		String pathToResultNotesFile = System.getProperty("user.dir") + "/resources/mapped/results.txt";
 		String pathToTrainErrorsNotesFile = System.getProperty("user.dir") + "/resources/mapped/train_rmse.txt";
-		String resultsFilename = "preferences_7";
+		String resultsFilename = "preferences_7_1";
 		String comment = "\ncold start decision: get avg ot item avg and user avg \nhybrid: none";
 		
 		//userBased
