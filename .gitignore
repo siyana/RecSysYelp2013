@@ -13,6 +13,8 @@
 
 /.recommenders/
 yelp_training_set/
+yelp_test_set/
+final_test_set/
 .metadata/
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
